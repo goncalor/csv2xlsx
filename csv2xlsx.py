@@ -21,6 +21,8 @@ parser.add_argument("--no-autofilter",
 parser.add_argument("--no-freeze-header",
                     action="store_true",
                     help="do not freeze header row")
+parser.add_argument("--delimiter",
+                    help="CSV delimiter character")
 args = parser.parse_args()
 
 if not os.path.isfile(args.csv_file):
@@ -32,6 +34,8 @@ sample = csvfile.read(CSV_SAMPLE_SIZE)
 csvfile.seek(0)
 dialect = csv.Sniffer().sniff(sample)
 has_header = csv.Sniffer().has_header(sample)
+if args.delimiter:
+    dialect.delimiter = args.delimiter
 
 # Determine number of columns
 reader = csv.reader(csvfile, dialect)
