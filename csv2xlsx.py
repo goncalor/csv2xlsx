@@ -49,13 +49,20 @@ format_row = workbook.add_format()
 format_row.set_align("top")
 col_width = [MIN_COL_WIDTH for c in range(nr_columns)]
 
+col_width_err = False
 for (r, row) in enumerate(reader):
     worksheet.write_row(r, 0, row, format_row)
     # Calculate column width
     for (c, coltxt) in enumerate(row):
         lentxt = len(coltxt)
-        if lentxt > col_width[c]:
-            col_width[c] = lentxt if lentxt < MAX_COL_WIDTH else MAX_COL_WIDTH
+        try:
+            if lentxt > col_width[c]:
+                col_width[c] = lentxt if lentxt < MAX_COL_WIDTH else MAX_COL_WIDTH
+        except:
+            col_width_err = True
+
+if col_width_err:
+    print("WARN: error setting column width. Try to specify the input CSV delimiter character with '--delimiter'", file=sys.stderr)
 
 # Set column width
 for (c, width) in enumerate(col_width):
