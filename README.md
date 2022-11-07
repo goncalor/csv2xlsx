@@ -4,7 +4,7 @@ csv2xlsx
 Usage
 -----
 
-    usage: csv2xlsx.py [-h] [--no-autofilter] [--no-freeze-header] <file.csv>
+    usage: csv2xlsx.py [-h] [--no-autofilter] [--no-freeze-header] [--delimiter DELIM] <file.csv>
 
     Convert CSV to XLSX
 
@@ -15,3 +15,4 @@ Usage
       -h, --help          show this help message and exit
       --no-autofilter     do not apply autofilters to header row
       --no-freeze-header  do not freeze header row
+      --delimiter DELIM   CSV delimiter character
